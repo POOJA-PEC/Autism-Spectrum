@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Game Results</title>
+    <style>
+        body {
+            position: relative;
+            background-image: url('static/result.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Default font color */
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+       
+        .score {
+            color: cyan; /* Color for the score */
+        }
+        .result {
+            color: green; /* Default color for the result */
+        }
+        .result.affected {
+            color: red; /* Color for the result if affected */
+        }
+        img {
+            width: 500px;
+            height: 500px;
+            display: block;
+            margin-top: 20px;
+        }
+        button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #d4ee3f;
+            color: rgb(15, 6, 6);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px 10px;
+        }   
+    </style>
+</head>
+<body>
+   <a href="/"> <button > Logout</button></a>
+<center>
+    
+    <h1>Final Result</h1>
+    <h2>Your game score - <span class="score">{{score}}</span></h2>
+    <h2>Your predicted result - <span class="result {{'affected' if result == 'Affected' else ''}}">{{result}}</span></h2>
+
+    <img src="static/upload_img.png" alt="..." /> 
+
+    <!-- Logout button -->
+</center>
+
+    </body>
+</html>

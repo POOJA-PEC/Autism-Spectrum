@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Questionnaire</title>
+    <style>
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        body{
+            background-color: rgb(2, 5, 5);
+            color:rgb(250, 250, 250)
+        }
+        p{
+            font-size:25px;
+            font-family:'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bolder;
+        }
+        h1{
+            font-size:40px;
+            font-family:'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bolder;
+            color: rgb(223, 37, 31);
+            
+        }
+        button {
+           
+            background-color: #b5f536;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px 10px;
+        }   
+        label{
+            color:rgb(75, 230, 241);
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        
+    <h1>Autism Questionnaire</h1>
+</center>
+
+    <form action="{{ url_for('submit') }}" method="post" id="questionnaireForm" id="questionnaireForm">
+        <ol>
+            <!-- Repeat for all questions -->
+            <li>
+                <p>Do you find it easy or hard to look at people's eyes when you're talking to them?</p>
+                <label>
+                    <input type="radio" name="q1" value="a" onclick="updateResult(this.value)"> a. I find it hard to look at people's eyes. It feels uncomfortable for me.
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="b" onclick="updateResult(this.value)"> b. I usually make good eye contact during conversations. It helps me feel connected to the person I'm talking to.
+                </label>
+            </li>
+			<br>
+            <!-- Repeat for all questions -->
+			<li>
+                <p>How do you feel about talking? Is it something that comes easily for you, or do you find it a bit challenging?</p>
+                <label>
+                    <input type="radio" name="q2" value="a" onclick="updateResult(this.value)"> a. Talking is a bit challenging. I sometimes struggle to express what I want to say.
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="b" onclick="updateResult(this.value)"> b. Talking comes pretty naturally to me. I enjoy expressing myself and having conversations with others.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>Tell me about your friends. Do you enjoy spending time with them, or do you prefer to be by yourself?</p>
+                <label>
+                    <input type="radio" name="q3" value="a" onclick="updateResult(this.value)"> a. I like being by myself more. It's easier for me to do my own thing.
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="b" onclick="updateResult(this.value)"> b. I enjoy spending time with my friends. It's fun to share experiences and make memories together.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>When you achieve something, do you like to share it with others, or do you prefer to keep it to yourself?</p>
+                <label>
+                    <input type="radio" name="q4" value="a" onclick="updateResult(this.value)"> a. I find it hard to look at people's eyes. It feels uncomfortable for me.
+                </label>
+                <label>
+                    <input type="radio" name="q4" value="b" onclick="updateResult(this.value)"> b. I usually make good eye contact during conversations. It helps me feel connected to the person I'm talking to.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>Do you have any movements or behaviors that you find yourself doing over and over again?</p>
+                <label>
+                    <input type="radio" name="q5" value="a" onclick="updateResult(this.value)"> a. Yeah, I do this thing with my hands a lot. It helps me feel calm.
+                </label>
+                <label>
+                    <input type="radio" name="q5" value="b" onclick="updateResult(this.value)"> b. I don't have any specific repetitive movements. I usually vary my activities throughout the day.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>How do you feel when your daily routine changes? Does it bother you, or are you okay with it?</p>
+                <label>
+                    <input type="radio" name="q6" value="a" onclick="updateResult(this.value)"> a. I really prefer having the same routine every day. Changes can be really hard for me.
+                </label>
+                <label>
+                    <input type="radio" name="q6" value="b" onclick="updateResult(this.value)"> b. I'm okay with changes in my routine. It doesn't bother me much, and I can adapt easily.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>How do you feel about loud noises? Do they bother you, or are you generally comfortable in noisy environments?</p>
+                <label>
+                    <input type="radio" name="q7" value="a" onclick="updateResult(this.value)"> a. Loud noises bother me a lot. I always cover my ears when it's too loud.
+                </label>
+                <label>
+                    <input type="radio" name="q7" value="b" onclick="updateResult(this.value)"> b. I'm not particularly sensitive to sensory stimuli. I can handle different textures, sounds, and lights without much issue.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>When it comes to textures, are there specific ones that you find uncomfortable or weird to touch?</p>
+                <label>
+                    <input type="radio" name="q8" value="a" onclick="updateResult(this.value)"> a. I can't stand certain textures. It just feels really weird to touch them.
+                </label>
+                <label>
+                    <input type="radio" name="q8" value="b" onclick="updateResult(this.value)"> b. I don't usually cover my ears or feel bothered by loud noises. My sensory experiences are pretty typical.
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>When you were younger, did you enjoy pretend play and make-believe games, or did you prefer engaging in activities that reflect the real world?</p>
+                <label>
+                    <input type="radio" name="q9" value="a" onclick="updateResult(this.value)"> a. I don't really get into pretend play much. I prefer doing things that are real.
+                </label>
+                <label>
+                    <input type="radio" name="q9" value="b" onclick="updateResult(this.value)"> b. I enjoy both real and pretend play. It depends on my mood and the situation.
+
+                </label>
+            </li>
+			<br>
+			<li>
+                <p>Do you find comfort in routine and doing the same activities repeatedly, or do you prefer trying new and different things?</p>
+                <label>
+                    <input type="radio" name="q10" value="a" onclick="updateResult(this.value)"> a. I like doing the same activities over and over. It's more comforting for me.
+                </label>
+                <label>
+                    <input type="radio" name="q10" value="b" onclick="updateResult(this.value)"> b. While I have my favorite activities, I also like trying new things. Variety keeps things interesting for me.
+                </label>
+            </li>
+        </ol>
+<center>
+        <div id="result"></div>
+		<button type="button" onclick="submitForm()">Submit</button>
+        </center>
+    </form>
+
+    <script>
+        function submitForm() {
+            let form = document.getElementById('questionnaireForm');
+            let formData = new FormData(form);
+    
+            fetch('/submit', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to new.html upon successful submission
+                    window.location.href = '/new';
+                } else {
+                    throw new Error('Failed to submit form');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }   
+    </script>
+    
+</body>
+
+</html>

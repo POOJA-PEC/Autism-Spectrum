@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Table</title>
+    <style>
+        body {
+            /* Background image */
+            background-image: url("static/table.jpg");
+            /* Set background size and repeat properties as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* Font color, size, and family for the whole body */
+            color: #f5f3f3; /* Black text color */
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            /* Font size and color for the heading */
+            font-size: 50px;
+            color: #ffcc00; /* Yellow heading color */
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        table {
+            /* Set the width of the table and center it */
+            width: 80%;
+            margin: auto;
+            /* Add some padding for readability */
+            padding: 10px;
+            /* Add border spacing for better presentation */
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th, td {
+            /* Set font size and family for the table columns */
+            font-size: 18px;
+            font-family: "Times New Roman", serif;
+            /* Set column width to evenly distribute columns */
+            width: 25%;
+            /* Center the text within each cell */
+            text-align: center;
+            /* Add padding to the table cells */
+            padding: 8px;
+        }
+
+        th {
+            /* Column header styles */
+            color: #08e8f0; /* White header text color */
+        }
+
+        
+
+        .navbar a {
+            /* Existing styles for the links (register, login, admin) */
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            /* Set link hover color */
+            transition: color 0.3s ease;
+          }
+      
+          .navbar a:hover {
+            /* Existing styles for the hover effect */
+            color: #ffcc00;
+          }
+      
+          /* Style for the buttons */
+          .btn {
+            background-color: #ffcc00;
+            color: #000;
+            /* Add border-radius for rounded corners */
+            border-radius: 5px;
+          }
+      
+          .btn:hover {
+            background-color: #ff9900;
+          }
+          button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #d4ee3f;
+            color: rgb(15, 14, 14);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px 10px;
+        }   
+
+    </style>
+</head>
+<body>
+    
+    <a href="/"> <button > Home</button></a>
+
+  
+  </div>
+    <h1>SCORE LIST</h1>
+    <table border="1">
+        <tr>
+            <th>User Id</th>
+            <th>Score</th>
+            <th>Result</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <!-- Add more <td> elements for each column in your table -->
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

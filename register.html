@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Toggle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: url("static/form.jpg");
+            background-size: cover;
+        }
+        #form-container {
+            width: 300px;
+            margin: 50px auto;
+        }
+
+        /* Style the navigation bar */
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        /* Style the navbar buttons */
+        .navbar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px 10px;
+        }
+
+        /* Style the form */
+        form {
+            display: none;
+            background-color: #94e9e571;
+            padding: 30px;
+            border-radius: 5px 10px;
+        }
+
+        /* Style the labels */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Style the inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Style the submit button */
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <button onclick="toggleForm('register-form')"><i class="fas fa-user-plus"></i> Register</button>
+    <button onclick="toggleForm('login-form')"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <button onclick="toggleForm('admin-form')"><i class="fas fa-user-cog"></i> Admin</button>
+
+</div>
+
+<div id="form-container">
+    <form id="register-form" method="POST" action="/register">
+        <h2><i class="fas fa-user-plus"></i> Register Form</h2>
+
+        <label for="user_name"><i class="fas fa-user"></i> Username:</label>
+        <input type="text" name="user_name" required>
+        <br>
+        <label for="user_id"><i class="fas fa-envelope"></i> User id:</label>
+        <input type="text" name="user_id" required>
+        <br>
+        <label for="age"><i class="fas fa-envelope"></i> age:</label>
+        <input type="number" name="age" required>
+        <br>
+        <label for="password"><i class="fas fa-lock"></i> Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+
+    <form id="login-form" method="POST" action="/login">
+        <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+
+        <label for="user_id"><i class="fas fa-envelope"></i> User id:</label>
+        <input type="text" name="user_id" required>
+        <br>
+        <label for="password"><i class="fas fa-lock"></i> Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+
+
+
+    <form id="admin-form" method="POST" action="/admin">
+        <h2><i class="fas fa-user-cog"></i> admin</h2>
+
+        <label for="user_id"><i class="fas fa-envelope"></i> user id:</label>
+        <input type="text" name="user_id" required>
+        <br>
+        <label for="password"><i class="fas fa-lock"></i> Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+
+</div>
+
+
+
+<script>
+    function toggleForm(formId) {
+        var forms = document.querySelectorAll('form');
+        forms.forEach(function(form) {
+            form.style.display = 'none';
+        });
+
+        var selectedForm = document.getElementById(formId);
+        if (selectedForm) {
+            selectedForm.style.display = 'block';
+        }
+    }
+
+   
+</script>
+
+</body>
+</html>

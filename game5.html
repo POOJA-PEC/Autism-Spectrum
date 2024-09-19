@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Show</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url("static/game1.jpg");
+            background-size: cover;
+        }
+        #colorText {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            padding: 10px 10px;
+        }
+
+        #game-area {
+            margin-top: 20px;
+        }
+
+        #sequence {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #input-letter {
+            margin-top: 10px;
+            padding: 5px;
+        }
+
+        #check-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="colorGame" style="display: block;">
+            <h2>Color Game Show</h2>
+            <div id="colorText">Guess the color of this text!</div>
+            <input type="text" id="userInput" placeholder="Enter the font color name">
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="colorResult"></p>
+        </div>
+
+        <div id="alphabetGame" style="display: none;">
+            <h2>Alphabet Game</h2>
+            <div id="game-area">
+                <p id="sequence"></p>
+                <input type="text" id="input-letter" maxlength="1" placeholder="Your answer">
+                <button id="check-btn">Check</button>
+                <p id="result"></p>
+            </div>
+        </div>
+
+        <div id="birdGame" style="display: none;">
+            <h2>Bird Guessing Game</h2>
+            <div id="birdImageContainer">
+                <img id="birdImage" src="" alt="Bird">
+            </div>
+            <div id="buttons">
+                <button id="cock">Cock</button>
+                <button id="crow">Crow</button>
+                <button id="parrot">Parrot</button>
+                <button id="peacock">Peacock</button>
+                <button id="pieogoen">Pigeon</button>
+            </div>
+        </div>
+        </div>
+        <p id="finalScore">Total Score: 0</p>   
+
+    </div>
+
+    <script>
+        const colors = ["red", "green", "yellow", "blue", "purple", "cyan", "white"];
+        let textColor;
+        let fontColor;
+        let totalScore = 0;
+
+
+        function displayColoredText() {
+            textColor = colors[Math.floor(Math.random() * colors.length)];
+            fontColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Ensure the font color and the text color are different
+            while (textColor === fontColor) {
+                fontColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            const colorText = document.getElementById("colorText");
+            colorText.innerHTML = `<span style="color: ${fontColor};">${textColor.charAt(0).toUpperCase() + textColor.slice(1)}</span>`;
+        }
+
+        function checkAnswer() {
+            const userInput = document.getElementById("userInput").value.toLowerCase();
+            const resultDisplay = document.getElementById("colorResult");
+
+            if (userInput === fontColor) {
+                resultDisplay.textContent = "Correct!";
+                totalScore++;
+                setTimeout(switchGame, 500); 
+
+            } else {
+                resultDisplay.textContent = "Incorrect! The correct font color was: ";
+                setTimeout(switchGame, 500);
+            }
+
+            setTimeout(function() {
+                resultDisplay.textContent = "";
+                displayColoredText();
+                document.getElementById("userInput").value = "";
+            }, 1500);
+        }
+
+        function switchGame() {
+            const colorGame = document.getElementById('colorGame');
+            const alphabetGame = document.getElementById('alphabetGame');
+    
+            if (colorGame.style.display === 'block') {
+                colorGame.style.display = 'none';
+                alphabetGame.style.display = 'block';
+                initGame();
+            } else {
+                colorGame.style.display = 'block';
+                alphabetGame.style.display = 'none';
+                displayColoredText();
+            }
+        }
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Function to generate a random sequence with a missing letter
+        function generateSequence() {
+            const index = Math.floor(Math.random() * alphabet.length);
+            const missingLetter = alphabet[index];
+            return alphabet.slice(0, index) + '_' + alphabet.slice(index + 1);
+        }
+
+        // Function to initialize the game
+        function initGame() {
+            const sequence = generateSequence();
+            document.getElementById('sequence').textContent = sequence;
+            document.getElementById('input-letter').value = '';
+            document.getElementById('result').textContent = '';
+            return sequence;
+        }
+
+        // Function to check the user's input
+        // Function to check the user's input
+// Function to check the user's input
+// Function to check the user's input
+function checkLetter() {
+  const inputLetter = document.getElementById('input-letter').value.toUpperCase();
+  const sequence = document.getElementById('sequence').textContent;
+  const underscoreIndex = sequence.indexOf('_');
+  const missingLetter = String.fromCharCode(sequence.charCodeAt(underscoreIndex - 1) + 1); // Find the letter after the underscore
+
+  if (inputLetter === missingLetter) {
+      document.getElementById('result').textContent = 'Correct!';
+      totalScore++;
+      switchToBirdGame();
+  } else if (inputLetter === '') {
+      document.getElementById('result').textContent = 'Please enter a letter.';
+  } else {
+      document.getElementById('result').textContent = `Incorrect. The missing letter is '${missingLetter}'. Try again!`;
+      switchToBirdGame();
+    }
+}
+
+
+        // Event listener for the Check button
+        document.getElementById('check-btn').addEventListener('click', checkLetter);
+
+        function switchToBirdGame() {
+            const colorGame = document.getElementById('colorGame');
+            const alphabetGame = document.getElementById('alphabetGame');
+            const birdGame = document.getElementById('birdGame');
+
+            colorGame.style.display = 'none';
+            alphabetGame.style.display = 'none';
+            birdGame.style.display = 'block';
+            showNextBird();
+        }
+
+        const birdImages = ["static/birds/cock.jpg", "static/birds/crow.jpg", "static/birds/parrot.jpg", "static/birds/peacock.jpg", "static/birds/pieogoen.jpg"];
+        const buttons = document.querySelectorAll("#buttons button");
+        const birdImage = document.getElementById("birdImage");
+        const scoreDisplay = document.getElementById("score");
+        let score = 0;
+        let currentBirdIndex = 0;
+        
+        function getRandomBirdIndex() {
+            return Math.floor(Math.random() * birdImages.length);
+        }
+        
+        function showNextBird() {
+            currentBirdIndex = getRandomBirdIndex();
+            birdImage.src = birdImages[currentBirdIndex];
+        }
+        
+        function getImageNameFromSrc(src) {
+            // Split the source URL by '/' and get the last part
+            const parts = src.split('/');
+            const imageNameWithExtension = parts[parts.length - 1];
+            // Remove the file extension
+            const imageName = imageNameWithExtension.split('.')[0];
+            return imageName;
+        }
+        
+        function handleButtonClick(event) {
+            const selectedBird = event.target.id;
+            const birdName = selectedBird.charAt(0).toUpperCase() + selectedBird.slice(1);
+            const imageName = getImageNameFromSrc(birdImage.src);
+            if (birdName.toLowerCase() === imageName) {
+                totalScore++;
+                updateTotalScoreDisplay();
+
+            } else {
+                updateTotalScoreDisplay();
+
+            }
+            scoreDisplay.textContent = score;
+            showNextBird();
+        }
+        
+        
+        buttons.forEach(button => {
+            button.addEventListener("click", handleButtonClick);
+        });
+        
+        function updateTotalScoreDisplay() {
+            const finalScoreDisplay = document.getElementById("finalScore");
+            finalScoreDisplay.textContent = "Total Score: " + totalScore*3.3;
+        }
+
+
+
+        document.querySelectorAll("#buttons button").forEach(button => {
+            button.addEventListener("click", function() {
+                const totalScoreElement = document.getElementById("finalScore");
+                const totalScore = parseInt(totalScoreElement.textContent.split(":")[1].trim());
+                
+                // Sending total score to the backend
+                fetch('/submit-score', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ finalScore: totalScore })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data); 
+                    window.location.href = '/new';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+        
+
+
+
+
+
+
+
+
+
+
+        window.onload = function() {
+            displayColoredText();
+        };
+    </script>
+</body>
